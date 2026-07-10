@@ -529,6 +529,20 @@ private void cargarCursos(){
 
     private void guardar(){
 
+        if(txtDni.getText().trim().isEmpty() ||
+                txtNombres.getText().trim().isEmpty() ||
+                txtApellidos.getText().trim().isEmpty() ||
+                txtCorreo.getText().trim().isEmpty() ||
+                txtTelefono.getText().trim().isEmpty()){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Complete todos los campos"
+            );
+
+            return;
+        }
+
 
         if(!txtDni.getText().matches("\\d{8}")){
 
@@ -543,6 +557,54 @@ private void cargarCursos(){
 
         }
 
+        if(!validarNombreApellido(txtNombres.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El nombre solo debe contener letras"
+            );
+
+            return;
+
+        }
+
+
+        if(!validarNombreApellido(txtApellidos.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El apellido solo debe contener letras"
+            );
+
+            return;
+
+        }
+
+
+
+        if(!validarTelefono(txtTelefono.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El teléfono debe tener 9 números"
+            );
+
+            return;
+
+        }
+
+
+
+        if(!validarCorreo(txtCorreo.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Ingrese un correo válido"
+            );
+
+            return;
+
+        }
 
 
         Curso curso =
@@ -669,7 +731,77 @@ private void cargarCursos(){
 
     private void actualizar(){
 
+        if(txtDni.getText().trim().isEmpty() ||
+                txtNombres.getText().trim().isEmpty() ||
+                txtApellidos.getText().trim().isEmpty() ||
+                txtCorreo.getText().trim().isEmpty() ||
+                txtTelefono.getText().trim().isEmpty()){
 
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Complete todos los campos"
+            );
+
+            return;
+        }
+        if(!txtDni.getText().matches("\\d{8}")){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El DNI debe tener exactamente 8 números"
+            );
+
+            return;
+
+        }
+
+
+        if(!validarNombreApellido(txtNombres.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El nombre solo debe contener letras"
+            );
+
+            return;
+
+        }
+
+
+        if(!validarNombreApellido(txtApellidos.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El apellido solo debe contener letras"
+            );
+
+            return;
+
+        }
+
+
+        if(!validarTelefono(txtTelefono.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El teléfono debe iniciar con 9 y tener 9 números"
+            );
+
+            return;
+
+        }
+
+
+        if(!validarCorreo(txtCorreo.getText())){
+
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Ingrese un correo válido"
+            );
+
+            return;
+
+        }
         int fila =
                 tablaMatricula.getSelectedRow();
 
@@ -923,4 +1055,33 @@ private void cargarCursos(){
 
 
 
+    // VALIDACIONES
+
+    private boolean validarNombreApellido(String texto){
+
+        return texto.matches(
+                "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$"
+        );
+
+    }
+
+
+    private boolean validarTelefono(String telefono){
+
+        return telefono.matches("^9\\d{8}$");
+
+    }
+
+
+    private boolean validarCorreo(String correo){
+
+        return correo.matches(
+                "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$"
+        );
+
+    }
+
+
 }
+
+
